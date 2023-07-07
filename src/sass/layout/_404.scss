@@ -1,0 +1,13 @@
+.not-found-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    color: $color-red;
+    @extend %text-title-large;
+  }
+  p {
+    @extend %text-title-medium;
+  }
+}
