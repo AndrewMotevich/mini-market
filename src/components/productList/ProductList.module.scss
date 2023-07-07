@@ -1,0 +1,23 @@
+@import "../../sass/abstracts/mixins";
+@import "../../sass/abstracts/variables";
+
+.productListWrapper {
+  max-width: 102.4rem;
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+}
+.productListContainer {
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  justify-items: center;
+  @include respond-to("medium") {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include respond-to("small") {
+    grid-template-columns: 1fr;
+  }
+}

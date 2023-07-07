@@ -1,0 +1,33 @@
+@import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
+@import "../../sass/base/typography";
+
+.cardWrapper {
+  width: 20rem;
+  height: 25rem;
+  background-color: $color-white;
+  border-radius: 1rem;
+  h3 {
+    margin: 0.5rem;
+    @extend %text-title-medium;
+    font-weight: bold;
+  }
+  &:hover {
+    cursor: pointer;
+    box-shadow: $shadow;
+  }
+}
+.description {
+  @extend %text-title-small;
+  height: 4rem;
+  margin: 1rem;
+  text-align: justify;
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: hidden;
+}
+.imageWrapper {
+  width: 20rem;
+  height: 15rem;
+  position: relative;
+}
