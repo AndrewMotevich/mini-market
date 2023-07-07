@@ -9,7 +9,7 @@ const Header = () => {
       <div className="header-container">
         <h1>
           <Image src={icon} width={50} height={50} alt="Logo" />
-          <Link href="/">Amazing Market</Link>
+          <Link href="/">Mini Market</Link>
         </h1>
         <nav>
           <ul>
