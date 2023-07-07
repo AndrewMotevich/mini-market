@@ -1,13 +1,13 @@
 @import "../../sass/abstracts/mixins";
 @import "../../sass/abstracts/variables";
 
-.productListWrapper {
+.productTableWrapper {
   max-width: 102.4rem;
   width: 100%;
   margin-top: 2rem;
   text-align: center;
 }
-.productListContainer {
+.productTableContainer {
   margin: 2rem 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;

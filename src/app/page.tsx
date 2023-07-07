@@ -1,11 +1,11 @@
-import ProductList from "@/components/productList/ProductList";
+import ProductTable from "@/components/productTable/ProductTable";
 
 export const revalidate = 60;
 
 export default async function Page() {
   return (
     <>
-      <ProductList />
+      <ProductTable />
     </>
   );
 }
