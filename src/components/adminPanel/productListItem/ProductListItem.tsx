@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+"use client";
+import React, { useState } from "react";
 import styles from "./ProductListItem.module.scss";
 import { IProduct } from "@/models/product.model";
-import { getImageFromDb } from "@/lib/postgresDb";
-import { NO_IMAGE_QUERY } from "@/constants/constants";
+import ModalWindow from "@/components/modal-window/ModalWindow";
 type Props = {
   product: IProduct;
 };
 
-const ProductListItem = async (props: Props) => {
+const ProductListItem = (props: Props) => {
+  const [modal, setModal] = useState(false);
+
   return (
-    <div className={styles.listItemWrapper}>
+    <div className={styles.listItemWrapper} onClick={() => setModal(true)}>
       <h2>{props.product.title}</h2>
       <button>Delete</button>
+      <ModalWindow visible={modal} setVisible={setModal}>
+        <h1>My modal</h1>
+      </ModalWindow>
     </div>
   );
 };
