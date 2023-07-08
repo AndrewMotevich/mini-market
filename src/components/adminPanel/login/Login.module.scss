@@ -1,3 +1,34 @@
+@import "../../../sass/abstracts/variables";
+@import "../../../sass/base/typography";
+
 .adminPanelWrapper {
+  margin: 1rem 0;
   width: 100%;
+}
+.buttonWrapper {
+  display: flex;
+  gap: 2rem;
+}
+.formWrapper {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    color: $color-blue;
+  }
+}
+.greetingsWrapper {
+  @extend %text-title-small;
+  h2 {
+    @extend %text-title-large;
+    font-weight: bold;
+  }
+  h3 {
+    @extend %text-title-medium;
+    font-weight: bold;
+  }
+}
+.greetingsWrapper > * {
+  margin: 1rem 0;
 }

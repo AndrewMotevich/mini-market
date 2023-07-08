@@ -1,4 +1,5 @@
 @import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
 
 .modalWrapper {
   position: fixed;
@@ -14,8 +15,13 @@
 .modalWindow {
   position: relative;
   width: 60vw;
-  height: 80vh;
   background-color: $color-gray;
+  @include respond-to("medium") {
+    width: 90vw;
+  }
+  @include respond-to("small") {
+    width: 90vw;
+  }
 }
 .modalWindowCross {
   cursor: pointer;

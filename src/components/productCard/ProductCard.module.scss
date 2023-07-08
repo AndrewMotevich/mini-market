@@ -5,6 +5,9 @@
 .cardWrapper {
   width: 20rem;
   height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: $color-white;
   border-radius: 1rem;
   h3 {
@@ -30,4 +33,10 @@
   width: 20rem;
   height: 15rem;
   position: relative;
+}
+.price {
+  @extend %text-title-small;
+  font-weight: bold;
+  text-align: right;
+  margin: 1rem;
 }

@@ -22,7 +22,7 @@ const ProductCard = async (props: Props) => {
           alt="Picture of the author"
         ></Image>
       </div>
-      <p className={styles.description}>{props.product.description}</p>
+      <p className={styles.price}>Price: {props.product.price} $</p>
     </div>
   );
 };

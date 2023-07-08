@@ -4,15 +4,17 @@ type props = {
   inputRef: RefCallBack;
   name: string;
   onChange: ChangeHandler;
+  type: string;
+  label: string;
 };
 
-const MyInputText = ({ inputRef, name, onChange }: props) => {
+const MyInput = ({ inputRef, name, onChange, type, label }: props) => {
   return (
     <label>
-      <strong>{name}:</strong>
-      <input type="text" ref={inputRef} name={name} onChange={onChange} />
+      <strong>{label}:</strong>
+      <input type={type} ref={inputRef} name={name} onChange={onChange} />
     </label>
   );
 };
 
-export default MyInputText;
+export default MyInput;
