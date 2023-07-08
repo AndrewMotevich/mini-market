@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { NO_IMAGE_QUERY } from "@/constants/constants";
 import { IProduct } from "@/models/product.model";
+import { getImage } from "@/lib/postgresDb";
 
 type props = {
   id: string;
@@ -12,9 +13,6 @@ type props = {
   onChange: ChangeHandler;
   reference: React.RefObject<HTMLImageElement>;
   product: IProduct;
-};
-type postgresResponse = {
-  result: { rows: { "0": { image_data: string } } };
 };
 
 const MyInputFile = ({
@@ -81,15 +79,5 @@ const MyInputFile = ({
     </div>
   );
 };
-
-async function getImage(id: string): Promise<postgresResponse> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 
 export default MyInputFile;

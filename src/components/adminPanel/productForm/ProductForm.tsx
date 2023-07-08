@@ -7,7 +7,7 @@ import MyInput from "./input-text/MyInputText";
 
 import styles from "./ProductForm.module.scss";
 import { IProduct } from "@/models/product.model";
-import { NO_IMAGE_QUERY } from "@/constants/constants";
+import { addProductToDb, updateProductInDb } from "@/lib/kvDb";
 type Props = {
   product?: IProduct;
   modal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -104,22 +104,5 @@ const ProductForm = ({ product, action, modal }: Props) => {
     </div>
   );
 };
-
-async function addProductToDb(product: IProduct) {
-  return await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`, {
-    method: "POST",
-    body: JSON.stringify(product),
-  });
-}
-
-async function updateProductInDb(product: IProduct) {
-  return await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${product.id}`,
-    {
-      method: "PUT",
-      body: JSON.stringify(product),
-    }
-  );
-}
 
 export default ProductForm;

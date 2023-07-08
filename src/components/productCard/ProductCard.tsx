@@ -2,14 +2,14 @@ import React from "react";
 import Image from "next/image";
 import styles from "./ProductCard.module.scss";
 import { NO_IMAGE_QUERY } from "../../constants/constants";
-import { getImageFromDb } from "@/lib/postgresDb";
+import { getImageFromDbDirectly } from "@/lib/postgresDb";
 import { IProduct } from "@/models/product.model";
 type Props = {
   product: IProduct;
 };
 
 const ProductCard = async (props: Props) => {
-  const { rows } = await getImageFromDb(props.product.imageId);
+  const { rows } = await getImageFromDbDirectly(props.product.imageId);
 
   return (
     <div className={styles.cardWrapper}>
