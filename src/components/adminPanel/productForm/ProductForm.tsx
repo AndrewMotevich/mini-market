@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import styles from "./ProductForm.module.scss";
 import { FieldValues, useForm } from "react-hook-form";
+
 import MyInputFile from "./input-file/MyInputFile";
 import MyInput from "./input-text/MyInputText";
+
+import styles from "./ProductForm.module.scss";
 import { IProduct } from "@/models/product.model";
 
 const ProductForm = ({ product }: { product?: IProduct }) => {
@@ -13,16 +15,19 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
   const title = register<string>("title", { required: true });
   const description = register("description", { required: true });
   const price = register("price", { required: true });
-  const img = register("img", { required: true });
+  const img = register("img");
 
   const onSubmit = (data: FieldValues) => {
+    const getId = product ? product.id : Date.now().toString();
     const newProduct: IProduct = {
-      id: product.id || Date.now().toString(),
+      id: getId,
       title: data.title,
       description: data.description,
       imageId: "1",
       price: Number(data.price),
     };
+    console.log(newProduct);
+
     const file = data.img.item(0);
     if (!file) return;
     const reader = new FileReader();
@@ -30,11 +35,12 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
     reader.onload = () => {
       // product.img = reader.result as string;
       // addProduct(product);
-      console.log(newProduct);
+
       (image.current as HTMLImageElement).src = "";
       (image.current as HTMLImageElement).classList.add(styles.hide);
-      reset({ title: "", img: "", description: "", price: "" });
     };
+
+    reset({ title: "", img: "", description: "", price: "" });
   };
 
   useEffect(() => {
@@ -45,6 +51,7 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
       title: product.title,
       description: product.description,
       price: product.price,
+      img: "",
     });
   }, []);
 
@@ -80,6 +87,7 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
           name={img.name}
           onChange={img.onChange}
           reference={image}
+          id={product ? product.id : "add-new-product"}
         />
         <button type="submit" className={styles.submitButton + " button-7"}>
           Submit

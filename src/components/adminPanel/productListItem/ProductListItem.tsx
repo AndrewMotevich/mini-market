@@ -15,9 +15,17 @@ const ProductListItem = (props: Props) => {
   return (
     <div className={styles.listItemWrapper} onClick={() => setModal(true)}>
       <h2>{props.product.title}</h2>
-      <AiOutlineDelete className={styles.deleteIcon} />
+      <AiOutlineDelete
+        className={styles.deleteIcon}
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+      />
       <ModalWindow visible={modal} setVisible={setModal}>
-        <ProductForm product={props.product} />
+        <div className={styles.formWrapper}>
+          <h2 className={styles.modalTitle}>Edit product</h2>
+          <ProductForm product={props.product} />
+        </div>
       </ModalWindow>
     </div>
   );
