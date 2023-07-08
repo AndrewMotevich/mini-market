@@ -1,8 +1,9 @@
 import styles from "./MyInput.module.scss";
 import { ChangeHandler, RefCallBack } from "react-hook-form";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { NO_IMAGE_QUERY } from "@/constants/constants";
+import { IProduct } from "@/models/product.model";
 
 type props = {
   id: string;
@@ -10,9 +11,17 @@ type props = {
   name: string;
   onChange: ChangeHandler;
   reference: React.RefObject<HTMLImageElement>;
+  product: IProduct;
 };
 
-const MyInputFile = ({ inputRef, name, onChange, reference, id }: props) => {
+const MyInputFile = ({
+  inputRef,
+  name,
+  onChange,
+  reference,
+  id,
+  product,
+}: props) => {
   const addImgHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imgInput: HTMLInputElement = event.target as HTMLInputElement;
     const file = imgInput.files?.item(0);
@@ -27,6 +36,12 @@ const MyInputFile = ({ inputRef, name, onChange, reference, id }: props) => {
 
     return;
   };
+
+  useEffect(() => {
+    if (!product) return;
+    (reference.current as HTMLImageElement).src = NO_IMAGE_QUERY;
+    (reference.current as HTMLImageElement).className = styles.imgWrapper;
+  }, []);
 
   return (
     <div className={styles.wrapper}>

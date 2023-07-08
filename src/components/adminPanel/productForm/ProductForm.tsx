@@ -7,6 +7,7 @@ import MyInput from "./input-text/MyInputText";
 
 import styles from "./ProductForm.module.scss";
 import { IProduct } from "@/models/product.model";
+import { NO_IMAGE_QUERY } from "@/constants/constants";
 type Props = {
   product?: IProduct;
   modal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -94,6 +95,7 @@ const ProductForm = ({ product, action, modal }: Props) => {
           onChange={img.onChange}
           reference={image}
           id={product ? product.id : "add-new-product"}
+          product={product ? product : undefined}
         />
         <button type="submit" className={styles.submitButton + " button-7"}>
           Submit
