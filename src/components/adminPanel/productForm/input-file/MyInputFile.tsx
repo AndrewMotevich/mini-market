@@ -13,6 +13,9 @@ type props = {
   reference: React.RefObject<HTMLImageElement>;
   product: IProduct;
 };
+type postgresResponse = {
+  result: { rows: { "0": { image_data: string } } };
+};
 
 const MyInputFile = ({
   inputRef,
@@ -39,8 +42,10 @@ const MyInputFile = ({
 
   useEffect(() => {
     if (!product) return;
-    (reference.current as HTMLImageElement).src = NO_IMAGE_QUERY;
-    (reference.current as HTMLImageElement).className = styles.imgWrapper;
+    getImage(product.imageId).then((res) => {
+      (reference.current as HTMLImageElement).src = res.result.rows[0].image_data;
+      (reference.current as HTMLImageElement).className = styles.imgWrapper;
+    });
   }, []);
 
   return (
@@ -76,5 +81,15 @@ const MyInputFile = ({
     </div>
   );
 };
+
+async function getImage(id: string): Promise<postgresResponse> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 
 export default MyInputFile;

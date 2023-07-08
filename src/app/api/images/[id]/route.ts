@@ -17,7 +17,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
     const image = await req.json();
     return NextResponse.json({
       result:
-        await sql`UPDATE images WHERE SET image_data = ${image} WHERE id = ${params.id}`,
+        await sql`UPDATE images SET image_data = ${image.image_data} WHERE id = ${params.id}`,
     });
   } catch (error) {
     return new Response((error as Error).message, { status: 500 });
