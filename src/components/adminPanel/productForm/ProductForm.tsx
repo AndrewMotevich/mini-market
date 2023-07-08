@@ -7,15 +7,20 @@ import MyInput from "./input-text/MyInputText";
 
 import styles from "./ProductForm.module.scss";
 import { IProduct } from "@/models/product.model";
+type Props = {
+  product?: IProduct;
+  modal: React.Dispatch<React.SetStateAction<boolean>>;
+  action: (product: IProduct) => void;
+};
 
-const ProductForm = ({ product }: { product?: IProduct }) => {
+const ProductForm = ({ product, action, modal }: Props) => {
   const image = useRef() as React.RefObject<HTMLImageElement>;
   const { register, reset, handleSubmit } = useForm();
 
   const title = register<string>("title", { required: true });
   const description = register("description", { required: true });
   const price = register("price", { required: true });
-  const img = register("img");
+  const img = register("img", { required: true });
 
   const onSubmit = (data: FieldValues) => {
     const getId = product ? product.id : Date.now().toString();
@@ -27,6 +32,7 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
       price: Number(data.price),
     };
     console.log(newProduct);
+    action(newProduct);
 
     const file = data.img.item(0);
     if (!file) return;
@@ -34,13 +40,13 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       // product.img = reader.result as string;
-      // addProduct(product);
-
+      if (!product) addProductToDb(newProduct);
+      else updateProductInDb(newProduct);
       (image.current as HTMLImageElement).src = "";
       (image.current as HTMLImageElement).classList.add(styles.hide);
     };
-
     reset({ title: "", img: "", description: "", price: "" });
+    modal(false);
   };
 
   useEffect(() => {
@@ -53,7 +59,7 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
       price: product.price,
       img: "",
     });
-  }, []);
+  }, [product]);
 
   return (
     <div className={styles.formWrapper}>
@@ -97,18 +103,21 @@ const ProductForm = ({ product }: { product?: IProduct }) => {
   );
 };
 
-async function addProduct(product: IProduct) {
+async function addProductToDb(product: IProduct) {
   return await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`, {
     method: "POST",
     body: JSON.stringify(product),
   });
 }
 
-async function updateProduct(product: IProduct) {
-  return await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`, {
-    method: "POST",
-    body: JSON.stringify(product),
-  });
+async function updateProductInDb(product: IProduct) {
+  return await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${product.id}`,
+    {
+      method: "PUT",
+      body: JSON.stringify(product),
+    }
+  );
 }
 
 export default ProductForm;

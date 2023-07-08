@@ -7,6 +7,8 @@ import ProductForm from "../productForm/ProductForm";
 import { AiOutlineDelete } from "react-icons/ai";
 type Props = {
   product: IProduct;
+  update: (product: IProduct) => void;
+  delete: (id: string) => void;
 };
 
 const ProductListItem = (props: Props) => {
@@ -19,12 +21,13 @@ const ProductListItem = (props: Props) => {
         className={styles.deleteIcon}
         onClick={(event) => {
           event.stopPropagation();
+          props.delete(props.product.id);
         }}
       />
       <ModalWindow visible={modal} setVisible={setModal}>
         <div className={styles.formWrapper}>
           <h2 className={styles.modalTitle}>Edit product</h2>
-          <ProductForm product={props.product} />
+          <ProductForm product={props.product} action={props.update} modal={setModal} />
         </div>
       </ModalWindow>
     </div>
