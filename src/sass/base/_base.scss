@@ -24,3 +24,9 @@ h3 {
   font-size: 1.6rem;
   margin: 0;
 }
+
+.text-danger {
+  margin: 0 !important;
+  @extend %text-title-XSmall;
+  color: $color-red;
+}

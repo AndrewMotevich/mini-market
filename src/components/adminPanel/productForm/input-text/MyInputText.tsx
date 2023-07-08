@@ -11,7 +11,10 @@ type props = {
 const MyInput = ({ inputRef, name, onChange, type, label }: props) => {
   return (
     <label>
-      <strong>{label}:</strong>
+      <strong>
+        {label}
+        <span>*</span>:
+      </strong>
       <input type={type} ref={inputRef} name={name} onChange={onChange} />
     </label>
   );

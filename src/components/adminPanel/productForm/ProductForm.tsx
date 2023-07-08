@@ -17,11 +17,32 @@ type Props = {
 
 const ProductForm = ({ product, action, modal }: Props) => {
   const image = useRef() as React.RefObject<HTMLImageElement>;
-  const { register, reset, handleSubmit } = useForm();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const title = register<string>("title", { required: true });
-  const description = register("description", { required: true });
-  const price = register("price", { required: true });
+  const handleError = (errors: unknown) => {
+    console.log(errors);
+  };
+
+  const registerOptions = {
+    title: { required: "Title is required" },
+    price: { required: "Price is required" },
+    description: {
+      required: "Description is required",
+      maxLength: {
+        value: 255,
+        message: "Description must be maximum 255 characters",
+      },
+    },
+  };
+
+  const title = register<string>("title", registerOptions.title);
+  const description = register("description", registerOptions.title);
+  const price = register("price", registerOptions.price);
   const img = register("img", { required: true });
 
   const onSubmit = (data: FieldValues) => {
@@ -74,7 +95,10 @@ const ProductForm = ({ product, action, modal }: Props) => {
 
   return (
     <div className={styles.formWrapper}>
-      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={styles.formContainer}
+        onSubmit={handleSubmit(onSubmit, handleError)}
+      >
         <MyInput
           label="Title"
           type="text"
@@ -82,8 +106,13 @@ const ProductForm = ({ product, action, modal }: Props) => {
           name={title.name}
           onChange={title.onChange}
         />
+        <small className="text-danger">
+          {errors?.title && (errors.title.message as string)}
+        </small>
         <label>
-          <strong>Description:</strong>
+          <strong>
+            Description<span>*</span>:
+          </strong>
           <textarea
             rows={5}
             maxLength={255}
@@ -92,6 +121,9 @@ const ProductForm = ({ product, action, modal }: Props) => {
             onChange={description.onChange}
           />
         </label>
+        <small className="text-danger">
+          {errors?.description && (errors.description.message as string)}
+        </small>
         <MyInput
           label="Price"
           type="number"
@@ -99,6 +131,9 @@ const ProductForm = ({ product, action, modal }: Props) => {
           name={price.name}
           onChange={price.onChange}
         />
+        <small className="text-danger">
+          {errors?.price && (errors.price.message as string)}
+        </small>
         <MyInputFile
           inputRef={img.ref}
           name={img.name}

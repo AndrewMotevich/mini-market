@@ -51,6 +51,7 @@ const MyInputFile = ({
     <div className={styles.wrapper}>
       <p>
         <strong>Add image</strong>
+        <span className={styles.red}>*</span>
       </p>
       <div className={styles.container}>
         <label className={styles.label} id="add-img-label" htmlFor={id}>
