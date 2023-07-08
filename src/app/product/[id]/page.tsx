@@ -11,6 +11,8 @@ type Props = {
   };
 };
 
+export const revalidate = 60;
+
 const ProductPage = async ({ params }: Props) => {
   const result = await getProduct(params.id);
   const product = result.result[0];
