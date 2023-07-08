@@ -7,6 +7,16 @@ export async function addProductToDb(product: IProduct) {
   });
 }
 
+export async function getProductsFromDb(): Promise<{
+  result: { [key: string]: IProduct }[];
+}> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
 export async function updateProductInDb(product: IProduct) {
   return await fetch(
     `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${product.id}`,
@@ -15,4 +25,10 @@ export async function updateProductInDb(product: IProduct) {
       body: JSON.stringify(product),
     }
   );
+}
+
+export async function deleteProductInDb(id: string) {
+  return await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${id}`, {
+    method: "DELETE",
+  });
 }

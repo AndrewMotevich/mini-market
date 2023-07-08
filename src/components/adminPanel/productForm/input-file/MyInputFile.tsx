@@ -41,7 +41,8 @@ const MyInputFile = ({
   useEffect(() => {
     if (!product) return;
     getImage(product.imageId).then((res) => {
-      (reference.current as HTMLImageElement).src = res.result.rows[0].image_data;
+      (reference.current as HTMLImageElement).src =
+        res.result.rows[0]?.image_data || NO_IMAGE_QUERY;
       (reference.current as HTMLImageElement).className = styles.imgWrapper;
     });
   }, []);

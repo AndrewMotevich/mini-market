@@ -8,6 +8,7 @@ import MyInput from "./input-text/MyInputText";
 import styles from "./ProductForm.module.scss";
 import { IProduct } from "@/models/product.model";
 import { addProductToDb, updateProductInDb } from "@/lib/kvDb";
+import { addImage, updateImage } from "@/lib/postgresDb";
 type Props = {
   product?: IProduct;
   modal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,28 +25,37 @@ const ProductForm = ({ product, action, modal }: Props) => {
   const img = register("img", { required: true });
 
   const onSubmit = (data: FieldValues) => {
+    let imageId = "1";
     const getId = product ? product.id : Date.now().toString();
     const newProduct: IProduct = {
       id: getId,
       title: data.title,
       description: data.description,
-      imageId: "1",
+      imageId: imageId,
       price: Number(data.price),
     };
-    console.log(newProduct);
-    action(newProduct);
 
     const file = data.img.item(0);
     if (!file) return;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      // product.img = reader.result as string;
-      if (!product) addProductToDb(newProduct);
-      else updateProductInDb(newProduct);
+      let imageStr = reader.result as string;
+      if (!product) {
+        addImage(imageStr).then((res) => {
+          imageId = res.result.rows[0].id.toString();
+          addProductToDb({ ...newProduct, imageId: imageId });
+        });
+      } else {
+        console.log(imageStr.length);
+        updateImage(imageStr, product.imageId).then(() => {
+          updateProductInDb({ ...newProduct, imageId: product.imageId });
+        });
+      }
       (image.current as HTMLImageElement).src = "";
       (image.current as HTMLImageElement).classList.add(styles.hide);
     };
+    action(newProduct);
     reset({ title: "", img: "", description: "", price: "" });
     modal(false);
   };

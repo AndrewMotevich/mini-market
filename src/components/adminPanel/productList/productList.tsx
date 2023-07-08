@@ -7,12 +7,13 @@ import { useAsyncCallback } from "@/hooks/useAsyncCallback";
 import ModalWindow from "@/components/modal-window/ModalWindow";
 import ProductForm from "../productForm/ProductForm";
 import { signOut } from "next-auth/react";
+import { getProductsFromDb } from "@/lib/kvDb";
 
 const ProductList = () => {
   const [modal, setModal] = useState(false);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [response, isLoading] = useAsyncCallback(async () => {
-    const data = await getProducts();
+    const data = await getProductsFromDb();
     data.result.map((response) => {
       const products = Object.keys(response).map((key) => response[key]);
       setProducts(products);
@@ -77,11 +78,4 @@ const ProductList = () => {
   );
 };
 
-async function getProducts(): Promise<{ result: { [key: string]: IProduct }[] }> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 export default ProductList;
