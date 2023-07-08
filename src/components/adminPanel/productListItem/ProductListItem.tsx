@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./ProductListItem.module.scss";
 import { IProduct } from "@/models/product.model";
 import ModalWindow from "@/components/modal-window/ModalWindow";
+import ProductForm from "../productForm/ProductForm";
 type Props = {
   product: IProduct;
 };
@@ -15,7 +16,7 @@ const ProductListItem = (props: Props) => {
       <h2>{props.product.title}</h2>
       <button>Delete</button>
       <ModalWindow visible={modal} setVisible={setModal}>
-        <h1>My modal</h1>
+        <ProductForm />
       </ModalWindow>
     </div>
   );
