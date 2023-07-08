@@ -1,4 +1,9 @@
+import { getProduct } from "@/lib/kvDb";
+import { getImageFromDbDirectly } from "@/lib/postgresDb";
 import React from "react";
+import Image from "next/image";
+import { NO_IMAGE_QUERY } from "@/constants/constants";
+import Link from "next/link";
 
 type Props = {
   params: {
@@ -6,23 +11,30 @@ type Props = {
   };
 };
 
-async function getData(id: string) {
-  // const res = await fetch(
-  //   `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/vacancies/${id}`
-  // );
-  // if (res.status !== 200) {
-  //   throw new Error("Failed to fetch data");
-  // }
-  // return res.json();
-}
+const ProductPage = async ({ params }: Props) => {
+  const result = await getProduct(params.id);
+  const product = result.result[0];
+  const { rows } = await getImageFromDbDirectly(product.imageId);
 
-const Vacancy = async ({ params }: Props) => {
-  const data = await getData(params.id);
   return (
-    <div>
-      <div>{params.id}</div>
+    <div className="products-wrapper">
+      <div className="image-wrapper">
+        <Image
+          src={rows[0].image_data || NO_IMAGE_QUERY}
+          layout="fill"
+          objectFit="cover"
+          alt="Picture of the author"
+        ></Image>
+      </div>
+      <h3>Product name: {product.title}</h3>
+      <h3>Description: </h3>
+      <p>{product.description}</p>
+      <h3>Price: {product.price} $</h3>
+      <button className="button-7">
+        <Link href="/contacts">By product</Link>
+      </button>
     </div>
   );
 };
 
-export default Vacancy;
+export default ProductPage;

@@ -4,6 +4,7 @@ import styles from "./ProductCard.module.scss";
 import { NO_IMAGE_QUERY } from "../../constants/constants";
 import { getImageFromDbDirectly } from "@/lib/postgresDb";
 import { IProduct } from "@/models/product.model";
+import Link from "next/link";
 type Props = {
   product: IProduct;
 };
@@ -12,7 +13,7 @@ const ProductCard = async (props: Props) => {
   const { rows } = await getImageFromDbDirectly(props.product.imageId);
 
   return (
-    <div className={styles.cardWrapper}>
+    <Link href={"product/" + props.product.id} className={styles.cardWrapper}>
       <h3>{props.product.title}</h3>
       <div className={styles.imageWrapper}>
         <Image
@@ -23,7 +24,7 @@ const ProductCard = async (props: Props) => {
         ></Image>
       </div>
       <p className={styles.price}>Price: {props.product.price} $</p>
-    </div>
+    </Link>
   );
 };
 

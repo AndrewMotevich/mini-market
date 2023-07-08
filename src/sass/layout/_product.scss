@@ -1,0 +1,27 @@
+.products-wrapper {
+  width: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    color: $color-white;
+  }
+  p {
+    @extend %text-title-small;
+  }
+}
+.products-wrapper > * {
+  margin: 2rem;
+}
+.image-wrapper {
+  align-self: center;
+  width: 30rem;
+  height: 20rem;
+  position: relative;
+  @include respond-to("small") {
+    width: 25rem;
+    height: 15rem;
+  }
+}

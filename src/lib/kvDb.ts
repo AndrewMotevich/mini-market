@@ -7,6 +7,18 @@ export async function addProductToDb(product: IProduct) {
   });
 }
 
+export async function getProduct(id: string): Promise<{
+  result: { [key: string]: IProduct };
+}> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${id}`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
 export async function getProductsFromDb(): Promise<{
   result: { [key: string]: IProduct }[];
 }> {
