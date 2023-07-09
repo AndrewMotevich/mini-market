@@ -1,13 +1,14 @@
 "use client";
-import { IProduct } from "@/models/product.model";
 import React, { useEffect, useState } from "react";
-import styles from "./ProductList.module.scss";
+import { signOut } from "next-auth/react";
+
 import ProductListItem from "../productListItem/ProductListItem";
-import { useAsyncCallback } from "@/hooks/useAsyncCallback";
 import ModalWindow from "@/components/modal-window/ModalWindow";
 import ProductForm from "../productForm/ProductForm";
-import { signOut } from "next-auth/react";
+import { useAsyncCallback } from "@/hooks/useAsyncCallback";
 import { getProductsFromDb } from "@/lib/kvDb";
+import { IProduct } from "@/models/product.model";
+import styles from "./ProductList.module.scss";
 
 const ProductList = () => {
   const [modal, setModal] = useState(false);

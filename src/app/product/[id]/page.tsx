@@ -1,9 +1,9 @@
-import { getProduct } from "@/lib/kvDb";
-import { getImageFromDbDirectly } from "@/lib/postgresDb";
 import React from "react";
 import Image from "next/image";
-import { NO_IMAGE_QUERY } from "@/constants/constants";
 import Link from "next/link";
+import { getProduct } from "@/lib/kvDb";
+import { getImageFromDbDirectly } from "@/lib/postgresDb";
+import { NO_IMAGE_QUERY } from "@/constants/constants";
 
 type Props = {
   params: {

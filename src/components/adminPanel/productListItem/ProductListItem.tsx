@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./ProductListItem.module.scss";
-import { IProduct } from "@/models/product.model";
+import { AiOutlineDelete } from "react-icons/ai";
+
 import ModalWindow from "@/components/modal-window/ModalWindow";
 import ProductForm from "../productForm/ProductForm";
-import { AiOutlineDelete } from "react-icons/ai";
+import styles from "./ProductListItem.module.scss";
 import { deleteImage } from "@/lib/postgresDb";
 import { deleteProductInDb } from "@/lib/kvDb";
+import { IProduct } from "@/models/product.model";
+
 type Props = {
   product: IProduct;
   update: (product: IProduct) => void;

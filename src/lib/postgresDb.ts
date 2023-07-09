@@ -1,15 +1,18 @@
-import { PostgresResponse } from "@/models/postgresResponse";
 import { sql } from "@vercel/postgres";
+import { PostgresResponse } from "@/models/postgresResponse";
 
 export async function getImageFromDbDirectly(id: string) {
   return await sql`SELECT image_data FROM images WHERE id = ${id}`;
 }
 
 export async function addImage(image: string): Promise<PostgresResponse> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images`, {
-    method: "POST",
-    body: JSON.stringify({ image_data: image }),
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images`,
+    {
+      method: "POST",
+      body: JSON.stringify({ image_data: image }),
+    }
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }

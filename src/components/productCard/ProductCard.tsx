@@ -1,16 +1,19 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./ProductCard.module.scss";
-import { NO_IMAGE_QUERY } from "../../constants/constants";
-import { getImageFromDbDirectly } from "@/lib/postgresDb";
-import { IProduct } from "@/models/product.model";
 import Link from "next/link";
+import { sql } from "@vercel/postgres";
+
+import { NO_IMAGE_QUERY } from "../../constants/constants";
+import { IProduct } from "@/models/product.model";
+import styles from "./ProductCard.module.scss";
+
 type Props = {
   product: IProduct;
 };
 
 const ProductCard = async (props: Props) => {
-  const { rows } = await getImageFromDbDirectly(props.product.imageId);
+  const { rows } =
+    await sql`SELECT image_data FROM images WHERE id = ${props.product.imageId}`;
 
   return (
     <Link href={"product/" + props.product.id} className={styles.cardWrapper}>
