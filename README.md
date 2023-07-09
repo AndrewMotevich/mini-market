@@ -13,6 +13,11 @@ Customer can add his goods, edit and delete them.
 </strong>
 Client watch goods and get customers contacts to order goods
 
+## Deployment: [LINK](https://slmax-react-testovoe-zadanie-swart.vercel.app/)
+
+![image](https://github.com/AndrewMotevich/slmax-react-testovoe-zadanie/assets/101500007/f41ac2bf-a3b4-4446-b6c5-3ba1745857e6)
+
+
 ## Features:
 - ISR for main page with product and for product page
 - All CRUD for admin:
