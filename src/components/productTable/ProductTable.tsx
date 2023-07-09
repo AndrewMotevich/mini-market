@@ -6,8 +6,12 @@ import { getProductsFromDb } from "@/lib/kvDb";
 
 const ProductTable = async () => {
   const data = await getProductsFromDb().then(async (res) => {
-    const result = await res.json();
-    console.log(result);
+    res.body
+      .getReader()
+      .read()
+      .then((res) => {
+        console.log(res.value);
+      });
   });
   return (
     <div className={styles.productTableWrapper}>
