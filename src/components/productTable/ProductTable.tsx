@@ -5,17 +5,16 @@ import styles from "./ProductTable.module.scss";
 import { getProductsFromDb } from "@/lib/kvDb";
 
 const ProductTable = async () => {
-  const data = await getProductsFromDb();
+  // const data = await getProductsFromDb();
   return (
     <div className={styles.productTableWrapper}>
       <h2>Mini Market products:</h2>
       <div className={styles.productTableContainer}>
-        {data.result.map((products) => {
+        {/* {data.result.map((products) => {
           return Object.keys(products).map((key, index) => (
-            // <ProductCard key={index} product={products[`${key}`]} />
-            <div key={index}>1</div>
+            <ProductCard key={index} product={products[`${key}`]} />
           ));
-        })}
+        })} */}
       </div>
     </div>
   );
