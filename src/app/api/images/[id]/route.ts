@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
+
 type Params = { params: { id: string } };
 
 export async function GET(req: NextRequest, { params }: Params) {
