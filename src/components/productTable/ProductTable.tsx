@@ -2,7 +2,6 @@ import { IProduct } from "@/models/product.model";
 import React from "react";
 import ProductCard from "../productCard/ProductCard";
 import styles from "./ProductTable.module.scss";
-import { getProductsFromDb } from "@/lib/kvDb";
 import { kv } from "@vercel/kv";
 
 const ProductTable = async () => {
