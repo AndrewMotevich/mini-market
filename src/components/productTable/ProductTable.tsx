@@ -20,9 +20,7 @@ const ProductTable = async () => {
 };
 
 async function getProducts(): Promise<{ result: { [key: string]: IProduct }[] }> {
-  const res = await fetch(
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }

@@ -6,13 +6,10 @@ export async function getImageFromDbDirectly(id: string) {
 }
 
 export async function addImage(image: string): Promise<PostgresResponse> {
-  const res = await fetch(
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images`,
-    {
-      method: "POST",
-      body: JSON.stringify({ image_data: image }),
-    }
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images`, {
+    method: "POST",
+    body: JSON.stringify({ image_data: image }),
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -21,7 +18,7 @@ export async function addImage(image: string): Promise<PostgresResponse> {
 
 export async function getImage(id: string): Promise<PostgresResponse> {
   const res = await fetch(
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -35,7 +32,7 @@ export async function updateImage(
 ): Promise<PostgresResponse> {
   console.log(image.length);
   const res = await fetch(
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`,
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`,
     { method: "PUT", body: JSON.stringify({ image_data: image }) }
   );
   if (!res.ok) {
@@ -46,7 +43,7 @@ export async function updateImage(
 
 export async function deleteImage(id: string): Promise<PostgresResponse> {
   const res = await fetch(
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`,
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${id}`,
     { method: "DELETE" }
   );
   if (!res.ok) {
