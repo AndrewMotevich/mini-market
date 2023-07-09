@@ -11,7 +11,7 @@ type Props = {
 
 const ProductCard = async (props: Props) => {
   const { rows } =
-    await await sql`SELECT image_data FROM images WHERE id = ${props.product.id}`;
+    await sql`SELECT image_data FROM images WHERE id = ${props.product.id}`;
 
   return (
     <Link href={"product/" + props.product.id} className={styles.cardWrapper}>
