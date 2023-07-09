@@ -10,7 +10,8 @@ const ProductTable = async () => {
       .getReader()
       .read()
       .then((res) => {
-        console.log(res.value);
+        const decoder = new TextDecoder();
+        console.log(decoder.decode(res.value));
       });
   });
   return (
