@@ -2,9 +2,10 @@ import { IProduct } from "@/models/product.model";
 import React from "react";
 import ProductCard from "../productCard/ProductCard";
 import styles from "./ProductTable.module.scss";
+import { getProductsFromDb } from "@/lib/kvDb";
 
 const ProductTable = async () => {
-  const data = await getProducts();
+  const data = await getProductsFromDb();
   return (
     <div className={styles.productTableWrapper}>
       <h2>Mini Market products:</h2>
@@ -19,11 +20,4 @@ const ProductTable = async () => {
   );
 };
 
-async function getProducts(): Promise<{ result: { [key: string]: IProduct }[] }> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 export default ProductTable;
