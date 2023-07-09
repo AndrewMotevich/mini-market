@@ -5,8 +5,9 @@ import styles from "./ProductTable.module.scss";
 import { getProductsFromDb } from "@/lib/kvDb";
 
 const ProductTable = async () => {
-  const data = await getProductsFromDb().then((res) => {
-    console.log(res);
+  const data = await getProductsFromDb().then(async (res) => {
+    const result = await res.json();
+    console.log(result);
   });
   return (
     <div className={styles.productTableWrapper}>
