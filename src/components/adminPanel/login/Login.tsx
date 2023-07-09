@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import styles from "./Login.module.scss";
 import { signIn, useSession } from "next-auth/react";
+
 import ProductList from "../productList/productList";
+import styles from "./Login.module.scss";
 
 const LoginComponent = () => {
   const { data } = useSession();

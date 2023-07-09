@@ -1,8 +1,9 @@
-import { IProduct } from "@/models/product.model";
 import React from "react";
-import ProductCard from "../productCard/ProductCard";
-import styles from "./ProductTable.module.scss";
 import { kv } from "@vercel/kv";
+
+import ProductCard from "../productCard/ProductCard";
+import { IProduct } from "@/models/product.model";
+import styles from "./ProductTable.module.scss";
 
 const ProductTable = async () => {
   const data: { [key: string]: IProduct }[] = await kv.json.get("products", "$");

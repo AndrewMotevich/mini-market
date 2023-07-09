@@ -1,10 +1,11 @@
-import styles from "./MyInput.module.scss";
-import { ChangeHandler, RefCallBack } from "react-hook-form";
 import React, { useEffect } from "react";
 import Image from "next/image";
+import { ChangeHandler, RefCallBack } from "react-hook-form";
+
 import { NO_IMAGE_QUERY } from "@/constants/constants";
 import { IProduct } from "@/models/product.model";
 import { getImage } from "@/lib/postgresDb";
+import styles from "./MyInput.module.scss";
 
 type props = {
   id: string;

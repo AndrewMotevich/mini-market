@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import classes from "./ModalWindow.module.scss";
+
 type props = {
   visible: boolean;
   setVisible: (visible: boolean) => void;

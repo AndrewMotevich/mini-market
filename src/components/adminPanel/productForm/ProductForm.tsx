@@ -9,6 +9,7 @@ import styles from "./ProductForm.module.scss";
 import { IProduct } from "@/models/product.model";
 import { addProductToDb, updateProductInDb } from "@/lib/kvDb";
 import { addImage, updateImage } from "@/lib/postgresDb";
+
 type Props = {
   product?: IProduct;
   modal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -76,6 +77,7 @@ const ProductForm = ({ product, action, modal }: Props) => {
       (image.current as HTMLImageElement).src = "";
       (image.current as HTMLImageElement).classList.add(styles.hide);
     };
+
     action(newProduct);
     reset({ title: "", img: "", description: "", price: "" });
     modal(false);
