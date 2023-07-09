@@ -6,18 +6,14 @@ import { getProductsFromDb } from "@/lib/kvDb";
 import { kv } from "@vercel/kv";
 
 const ProductTable = async () => {
-  const data = await kv.json.get("products", "$").then((res) => {
-    console.log(res);
-  });
+  const data: { [key: string]: IProduct } = await kv.json.get("products", "$");
   return (
     <div className={styles.productTableWrapper}>
       <h2>Mini Market products:</h2>
       <div className={styles.productTableContainer}>
-        {/* {data.result.map((products) => {
-          return Object.keys(products).map((key, index) => (
-            <ProductCard key={index} product={products[`${key}`]} />
-          ));
-        })} */}
+        {Object.keys(data).map((key, index) => (
+          <ProductCard key={index} product={data[`${key}`]} />
+        ))}
       </div>
     </div>
   );
