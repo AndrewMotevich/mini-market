@@ -12,6 +12,7 @@ type Props = {
 const ProductCard = async (props: Props) => {
   await sql`SELECT image_data FROM images WHERE id = ${props.product.imageId}`.then(
     (res) => {
+      console.log(props.product);
       console.log(res);
     }
   );
