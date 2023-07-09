@@ -12,7 +12,8 @@ const ProductTable = async () => {
       <div className={styles.productTableContainer}>
         {data.result.map((products) => {
           return Object.keys(products).map((key, index) => (
-            <ProductCard key={index} product={products[`${key}`]} />
+            // <ProductCard key={index} product={products[`${key}`]} />
+            <div key={index}>1</div>
           ));
         })}
       </div>
