@@ -6,13 +6,11 @@ import { getProductsFromDb } from "@/lib/kvDb";
 
 const ProductTable = async () => {
   const data = await getProductsFromDb().then(async (res) => {
-    res.body
-      .getReader()
-      .read()
-      .then((res) => {
-        const decoder = new TextDecoder();
-        console.log(decoder.decode(res.value));
-      });
+    const decoder = new TextDecoder();
+    decoder.decode();
+    res.arrayBuffer().then((res) => {
+      console.log(decoder.decode(res));
+    });
   });
   return (
     <div className={styles.productTableWrapper}>
