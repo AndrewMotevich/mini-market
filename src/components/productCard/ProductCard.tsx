@@ -10,19 +10,22 @@ type Props = {
 };
 
 const ProductCard = async (props: Props) => {
-  const { rows } =
-    await sql`SELECT image_data FROM images WHERE id = ${props.product.id}`;
+  await sql`SELECT image_data FROM images WHERE id = ${props.product.id}`.then(
+    (res) => {
+      console.log(res);
+    }
+  );
 
   return (
     <Link href={"product/" + props.product.id} className={styles.cardWrapper}>
       <h3>{props.product.title}</h3>
       <div className={styles.imageWrapper}>
-        <Image
+        {/* <Image
           src={rows[0].image_data || NO_IMAGE_QUERY}
           layout="fill"
           objectFit="cover"
           alt="Picture of the author"
-        ></Image>
+        ></Image> */}
       </div>
       <p className={styles.price}>Price: {props.product.price} $</p>
     </Link>
