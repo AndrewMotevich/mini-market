@@ -3,6 +3,11 @@
 This is a simple nextJs app, like a online shop.
 
 Customer can add his goods, edit and delete them.
+<details>
+ <summary>Credentials for admin page:</summary>
+  Login: admin
+  Password: root
+</details>
 
 Client watch goods and get customers contacts to order goods
 
