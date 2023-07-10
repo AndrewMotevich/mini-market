@@ -13,7 +13,7 @@ Customer can add his goods, edit and delete them.
 </strong>
 Client watch goods and get customers contacts to order goods
 
-## Deployment: [https://slmax-react-testovoe-zadanie-swart.vercel.app/](https://slmax-react-testovoe-zadanie-mhrlx9i27-andrewmotevich.vercel.app)
+## Deployment: [LINK]([https://slmax-react-testovoe-zadanie-mhrlx9i27-andrewmotevich.vercel.app](https://slmax-react-testovoe-zadanie-dfikoy3r6-andrewmotevich.vercel.app/))
 
 ![image](https://github.com/AndrewMotevich/slmax-react-testovoe-zadanie/assets/101500007/f41ac2bf-a3b4-4446-b6c5-3ba1745857e6)
 
