@@ -17,9 +17,13 @@ header {
   justify-content: space-between;
   h1 {
     a {
-      margin-left: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
       @include respond-to("small") {
-        display: none;
+        span {
+          display: none;
+        }
       }
     }
     width: 20rem;

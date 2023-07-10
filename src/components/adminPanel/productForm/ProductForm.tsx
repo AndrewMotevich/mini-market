@@ -43,7 +43,7 @@ const ProductForm = ({ product, action, modal }: Props) => {
   const title = register<string>("title", registerOptions.title);
   const description = register("description", registerOptions.title);
   const price = register("price", registerOptions.price);
-  const img = register("img", { required: true });
+  const img = register("img");
 
   const onSubmit = (data: FieldValues) => {
     let imageId = "1";
@@ -57,7 +57,14 @@ const ProductForm = ({ product, action, modal }: Props) => {
     };
 
     const file = data.img.item(0);
+
+    if (!file && product) {
+      updateProductInDb({ ...newProduct, imageId: product.imageId });
+      modal(false);
+      return;
+    }
     if (!file) return;
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -83,13 +90,13 @@ const ProductForm = ({ product, action, modal }: Props) => {
 
   useEffect(() => {
     if (!product) {
+      img.required = true;
       return;
     }
     reset({
       title: product.title,
       description: product.description,
       price: product.price,
-      img: "",
     });
   }, [product]);
 

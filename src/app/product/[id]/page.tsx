@@ -33,7 +33,7 @@ const ProductPage = async ({ params }: Props) => {
       <p>{product.description}</p>
       <h3>Price: {product.price} $</h3>
       <button className="button-7">
-        <Link href="/contacts">By product</Link>
+        <Link href="/contacts">Buy product</Link>
       </button>
     </div>
   );

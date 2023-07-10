@@ -8,8 +8,10 @@ const Header = () => {
     <header>
       <div className="header-container">
         <h1>
-          <Image src={icon} width={50} height={50} alt="Logo" />
-          <Link href="/">Mini Market</Link>
+          <Link href="/">
+            <Image src={icon} width={50} height={50} alt="Logo" />
+            <span>Mini Market</span>
+          </Link>
         </h1>
         <nav>
           <ul>
