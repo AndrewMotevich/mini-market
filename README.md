@@ -15,7 +15,7 @@ Client watch goods and get customers contacts to order goods
 
 ## Deployment: [LINK](https://slmax-react-testovoe-zadanie-dfikoy3r6-andrewmotevich.vercel.app/)
 
-![image](https://github.com/AndrewMotevich/slmax-react-testovoe-zadanie/assets/101500007/f41ac2bf-a3b4-4446-b6c5-3ba1745857e6)
+![image](https://github.com/AndrewMotevich/mini-market/assets/101500007/ac9244d7-b18a-41a6-8b17-c39eddeee8d4)
 
 
 ## Features:
