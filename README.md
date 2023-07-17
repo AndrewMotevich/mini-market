@@ -1,4 +1,4 @@
-# slmax-react-testovoe-zadanie
+# mini-market
 
 This is a simple nextJs app, like a online shop.
 
